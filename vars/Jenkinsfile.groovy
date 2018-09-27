@@ -1,6 +1,12 @@
-def call(Map pipelineParams) {
+def call(Pipeline) {
 node {
    def mvnHome
+   def checkOutFrom(repo) {
+   git url: "https://github.com/milenkom81/hello-world-war.git"
+   }
+
+   return this
+   
    stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
       git 'https://github.com/milenkom81/hello-world-war.git'
