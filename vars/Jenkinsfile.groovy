@@ -1,3 +1,4 @@
+def call(Map pipelineParams) {
 node {
    def mvnHome
    stage('Preparation') { // for display purposes
@@ -38,4 +39,5 @@ node {
        bat (/call mvn tomcat7:redeploy/)
    }
    }
+}
 }
