@@ -1,15 +1,13 @@
 node {
-   def mvnHome
+    
    stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
       git 'https://github.com/milenkom81/java-maven-junit-helloworld.git'
-      // Get the Maven tool.
-      // ** NOTE: This 'M3' Maven tool must be configured
-      // **       in the global configuration.           
-         }
+   }
+
    stage('Compile'){
        if (isUnix()){
-          sh '/opt/maven/bin/mvn compile' 
+          sh '$MAVEN_HOME/mvn compile' 
        } else {
            bat(/call mvn clean compile/)
        }
@@ -17,14 +15,14 @@ node {
    stage('Build') {
       // Run the maven build
       if (isUnix()) {
-         sh '/opt/maven/bin/mvn package'
+         sh '$MAVEN_HOME/mvn package'
       } else {
          bat(/call mvn package/)
       }
    }
     stage('Test') {
         if (isUnix()){
-      sh '/opt/maven/bin/mvn surefire-report:report'
+      sh '$MAVEN_HOME/mvn surefire-report:report'
       junit '**/target/surefire-reports/TEST-*.xml'
         } else {
         bat (/call mvn surefire-report:report/)
@@ -33,7 +31,7 @@ node {
    }
    stage('Tomcat Deploy') {
        if (isUnix()){
-       sh '/opt/maven/bin/mvn tomcat7:redeploy'
+       sh '$MAVEN_HOME/mvn tomcat7:redeploy'
    } else {
        bat (/call mvn tomcat7:redeploy/)
    }
