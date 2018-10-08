@@ -1,7 +1,7 @@
 #!groovy
 
 
-package org.helloworld
+
 class compileCode implements Serializable {
   def steps
   compileCode (steps) {this.steps = steps}
