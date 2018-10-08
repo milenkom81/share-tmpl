@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
-def call() {
-  node {
-    echo 'hello stuff'
-  }
+// vars/checkOut.groovy
+
+def call(String repo = 'repo') {
+	git '${repo}'
 }
